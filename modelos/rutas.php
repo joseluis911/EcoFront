@@ -8,7 +8,7 @@ class Ruta{
 
 	public function ctrRuta(){
 
-		return "https://demo.tutiendaenlinea.online/";
+		return "https://tutiendaenlinea.online/";
 
 	}
 
@@ -18,7 +18,7 @@ class Ruta{
 
 	public function ctrRutaServidor(){
 
-		return "https://demobackend.tutiendaenlinea.online/";
+		return "https://backend.tutiendaenlinea.online/";
 
 	}
 

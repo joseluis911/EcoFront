@@ -418,7 +418,7 @@ SECCIÓN PERFIL
 
 		  	</div>
 
-		  	<!--=====================================
+	  	<!--=====================================
 			PESTAÑA DESEOS
 			======================================-->
 
@@ -454,9 +454,82 @@ SECCIÓN PERFIL
 
 							foreach ($productos as $key => $value2) {
 
-							echo '<li class="col-md-3 col-sm-6 col-xs-12">
+							echo '<li class="col-md-3 col-sm-6 col-xs-12">';
 
-									<figure>
+							if ($value2["tipo"] == "marketing"){
+
+								/*=============================================
+								TRAER LINKS MARKETING
+								=============================================*/
+
+								$links = json_decode($value2["links"],true);
+
+							echo '<figure>
+								<a href="'.$links[0]["anchorImg"].'" class="pixelProducto">
+
+								<img src="'.$links[1]["foto"].'" class="img-responsive">
+
+								</a>
+								 <img src="'.$links[2]["foto2"].'" >
+								 </figure>
+
+							<h4>
+
+								<small>
+
+									<a href="'.$links[3]["anchorTexto"].'" class="pixelProducto">
+
+										'.$value2["titulo"].'<br>
+										<img src="'.$links[4]["textoImg"].'" />
+										<span style="color:rgba(0,0,0,0)">-</span>';
+
+										echo '<span class="label label-primary fontSize">Wal-Mart</span> ';
+
+										$fecha = date('Y-m-d');
+										$fechaActual = strtotime('-30 day', strtotime($fecha));
+										$fechaNueva = date('Y-m-d', $fechaActual);
+
+										if($fechaNueva < $value["fecha"]){
+
+											echo '<span class="label label-warning fontSize">Nuevo</span> ';
+
+										}
+
+										if($value2["oferta"] != 0 && $value2["precio"] != 0){
+
+											echo '<span class="label label-warning fontSize">'.$value2["descuentoOferta"].'% off</span>';
+
+										}
+
+									echo '</a>
+
+								</small>
+
+							</h4>
+
+									<div class="col-xs-6 precio">
+
+										<h2><small>MXN $'.$value2["precio"].'</small></h2>
+
+									</div>
+
+											<div class="col-xs-6 enlaces">
+
+												<div class="btn-group pull-right">
+
+												<button type="button" class="btn btn-danger btn-xs quitarDeseo" idDeseo="'.$value1["id"].'" data-toggle="tooltip" title="Quitar de mi lista de deseos">
+
+													<i class="fa fa-heart" aria-hidden="true"></i>
+
+												</button>
+
+											</div>
+										</li>';
+
+
+								}else{
+
+								echo'	<figure>
 
 										<a href="'.$url.$value2["ruta"].'" class="pixelProducto">
 
@@ -573,6 +646,7 @@ SECCIÓN PERFIL
 									</div>
 
 								</li>';
+							  }
 							}
 
 						echo '</ul>';
@@ -586,6 +660,7 @@ SECCIÓN PERFIL
 
 
 		  	</div>
+
 
 			<!--=====================================
 			PESTAÑA PERFIL
@@ -787,95 +862,119 @@ SECCIÓN PERFIL
 
 								
 
-									echo '<div class="row">
-												<div class="col-md-4 col-sm-12 col-xs-12">
-												 <input type="hidden" value="'.$_SESSION["id"].'" id="idUsuario" name="idUsuario">
-													<label class="control-label text-muted text-uppercase" for="editarCalle">Calle/Número/Interior:</label>
+										echo '<div class="row">
+										<div class="col-md-4 col-sm-12 col-xs-12">
+										 <input type="hidden" value="'.$_SESSION["id"].'" id="idUsuario" name="idUsuario">
+											<label class="control-label text-muted text-uppercase" for="editarCalle">Calle/Número/Interior:</label>
 
-													<div class="input-group">
+											<div class="input-group">
 
-														<span class="input-group-addon"><i class="fa fa-address"></i></span>
-														<input type="text" class="form-control" id="editarCalle" name="editarCalle" value="'.$_SESSION["calle"].'">
+												<span class="input-group-addon"><i class="fa fa-user"></i></span>
+												<input type="text" class="form-control" id="editarCalle" name="editarCalle" value="'.$_SESSION["calle"].'">
 
-													</div>
-											  </div>
-												<div class="col-md-4 col-sm-12 col-xs-12">
+											</div>
+								 </div>
 
-												<label class="control-label text-muted text-uppercase" for="editarColonia">Colonia:</label>
+								 <div class="col-md-4 col-sm-12 col-xs-12">
 
-												<div class="input-group">
+										<label class="control-label text-muted text-uppercase" for="editarColonia">Colonia:</label>
 
-														<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-														<input type="text" class="form-control" id="editarColonia" name="editarColonia" value="'.$_SESSION["colonia"].'">
+										<div class="input-group">
 
-												</div>
+												<span class="input-group-addon"><i class="fa fa-user"></i></span>
+												<input type="text" class="form-control" id="editarColonia" name="editarColonia" value="'.$_SESSION["colonia"].'">
 
-												</div>
+										</div>
 
-												<div class="col-md-4 col-sm-12 col-xs-12">
-													<label class="control-label text-muted text-uppercase" for="editarMunicipio">Delegación/Municipio:</label>
+								 </div>
 
-													<div class="input-group">
+								 <div class="col-md-4 col-sm-12 col-xs-12">
+											<label class="control-label text-muted text-uppercase" for="editarMunicipio">Delegación/Municipio:</label>
 
-														<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-														<input type="text" class="form-control" id="editarMunicipio" name="editarMunicipio" value="'.$_SESSION["municipio"].'">
-													</div>
+											<div class="input-group">
 
-												</div>
+												<span class="input-group-addon"><i class="fa fa-user"></i></span>
+												<input type="text" class="form-control" id="editarMunicipio" name="editarMunicipio" value="'.$_SESSION["municipio"].'">
+											</div>
 
-
-												</div>
-												<br />
+								 </div>
 
 
-												<div class="row">
-															<div class="col-md-4 col-sm-12 col-xs-12">
-
-																<label class="control-label text-muted text-uppercase" for="editarEstado">Estado:</label>
-
-																<div class="input-group">
-
-																	<span class="input-group-addon"><i class="fa fa-address"></i></span>
-																	<input type="text" class="form-control" id="editarEstado" name="editarEstado" value="'.$_SESSION["estado"].'">
-
-																</div>
-														  </div>
-															<div class="col-md-4 col-sm-12 col-xs-12">
-
-															<label class="control-label text-muted text-uppercase" for="editarCiudad">Ciudad:</label>
-
-															<div class="input-group">
-
-																	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-																	<input type="text" class="form-control" id="editarCiudad" name="editarCiudad" value="'.$_SESSION["ciudad"].'">
-
-															</div>
-
-															</div>
-
-															<div class="col-md-4 col-sm-12 col-xs-12">
-																<label class="control-label text-muted text-uppercase" for="editarCP">Codigo Postal:</label>
-
-																<div class="input-group">
-
-																	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-																	<input type="text" class="form-control" id="editarCP" name="editarCP" value="'.$_SESSION["cp"].'">
-																</div>
-
-															</div>
-
-															<br />
-															</div>
-															<div class="row">
-															<hr />
-															<div class="col-md-3">
-																<br />
-
-																	<button type="submit" class="btn btn-default backColor btn-md pull-left">Actualizar Datos</button>
+								</div>
+								<br />
 
 
-															</div>';
+								<div class="row">
 
+								 <div class="col-md-4 col-sm-12 col-xs-12">
+
+										<label class="control-label text-muted text-uppercase" for="editarEstado">Estado:</label>
+
+										<div class="input-group">
+
+											<span class="input-group-addon"><i class="fa fa-user"></i></span>
+											<input type="text" class="form-control" id="editarEstado" name="editarEstado" value="'.$_SESSION["estado"].'">
+
+										</div>
+								 </div>
+
+								 <div class="col-md-4 col-sm-12 col-xs-12">
+
+									<label class="control-label text-muted text-uppercase" for="editarCiudad">Ciudad:</label>
+
+									<div class="input-group">
+
+										<span class="input-group-addon"><i class="fa fa-user"></i></span>
+										<input type="text" class="form-control" id="editarCiudad" name="editarCiudad" value="'.$_SESSION["ciudad"].'">
+
+								    </div>
+
+								 </div>
+
+								 <div class="col-md-4 col-sm-12 col-xs-12">
+									<label class="control-label text-muted text-uppercase" for="editarCP">Codigo Postal:</label>
+
+									<div class="input-group">
+
+										<span class="input-group-addon"><i class="fa fa-user"></i></span>
+										<input type="text" class="form-control" id="editarCP" name="editarCP" value="'.$_SESSION["cp"].'">
+									</div>
+
+								 </div>
+
+								 <br />
+
+								</div>
+
+								<br>
+
+								<div class="row">
+
+									 <div class="col-md-4 col-sm-12 col-xs-12">
+										<label class="control-label text-muted text-uppercase" for="editarCP">Teléfono/ whatsapp:</label>
+
+									<div class="input-group">
+
+										<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+										<input type="text" class="form-control" id="editarTel" name="editarTel" value="'.$_SESSION["tel"].'">
+									</div>
+
+								 </div>
+
+								</div>
+
+
+								<div class="row">
+
+								<hr />
+
+								<div class="col-md-3 col-xs-12">
+								<br />
+
+										<button type="submit" class="btn btn-default backColor btn-md pull-left">Actualizar Datos</button>
+
+
+								</div>';
 
 
 

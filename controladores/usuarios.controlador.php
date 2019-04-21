@@ -1,4 +1,6 @@
 <?php
+
+
 //require_once "notificaciones.controlador.php";
 //require_once "../modelos/notificaciones.modelo.php";
 class ControladorUsuarios{
@@ -255,7 +257,7 @@ class ControladorUsuarios{
 					}else{
 							if(isset($_POST["g-recaptcha-response"])){
                               
-    							$secret = "6LcqUWoUAAAAAOjVATeyplwoZAD5ws8n9xYQU3sH";
+    							$secret = "6LfXmHwUAAAAADKL7Wv5Bkm6AHLyt7UPynolHrSY";
                               
                                 $response = $_POST["g-recaptcha-response"];
 
@@ -281,6 +283,7 @@ class ControladorUsuarios{
                                 $_SESSION["estado"] = $respuesta["estado"];
                                 $_SESSION["ciudad"] = $respuesta["ciudad"];
                                 $_SESSION["pais"] = $respuesta["pais"];
+                                $_SESSION["tel"] = $respuesta["tel"];
 
                                 echo '<script>
 
@@ -655,31 +658,33 @@ class ControladorUsuarios{
 		}
 
 		if($emailRepetido || $respuesta1 == "ok"){
-
+          
+			$respuesta3 = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $valor);	
 			$respuesta2 = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
-
+				
 			if($respuesta2["modo"] == "facebook"){
+                
+					session_start();
+              
+                  $_SESSION["validarSesion"] = "ok";
+                  $_SESSION["id"] = $respuesta2["id"];
+                  $_SESSION["nombre"] = $respuesta2["nombre"];
+                  $_SESSION["foto"] = $respuesta2["foto"];
+                  $_SESSION["email"] = $respuesta2["email"];
+                  $_SESSION["password"] = $respuesta2["password"];
+                  $_SESSION["modo"] = $respuesta2["modo"];
+                  $_SESSION["calle"] = $respuesta3["calle"];
+                  $_SESSION["colonia"] = $respuesta3["colonia"];
+                  $_SESSION["municipio"] = $respuesta3["municipio"];
+                  $_SESSION["tel"] = $respuesta3["tel"];
+                  $_SESSION["cp"] = $respuesta3["cp"];
+                  $_SESSION["estado"] = $respuesta3["estado"];
+                  $_SESSION["ciudad"] = $respuesta3["ciudad"];
+                  $_SESSION["pais"] = $respuesta3["pais"];
 
-				session_start();
 
-				$_SESSION["validarSesion"] = "ok";
-				$_SESSION["id"] = $respuesta2["id"];
-				$_SESSION["nombre"] = $respuesta2["nombre"];
-				$_SESSION["foto"] = $respuesta2["foto"];
-				$_SESSION["email"] = $respuesta2["email"];
-				$_SESSION["password"] = $respuesta2["password"];
-				$_SESSION["modo"] = $respuesta2["modo"];
-				$_SESSION["calle"] = $respuesta["calle"];
-				$_SESSION["colonia"] = $respuesta["colonia"];
-				$_SESSION["municipio"] = $respuesta["municipio"];
-				$_SESSION["cp"] = $respuesta["cp"];
-				$_SESSION["estado"] = $respuesta["estado"];
-				$_SESSION["ciudad"] = $respuesta["ciudad"];
-				$_SESSION["pais"] = $respuesta["pais"];
-
-
-				echo "ok";
-
+                  echo "ok";
+                
 			}else if($respuesta2["modo"] == "google"){
 
 				$_SESSION["validarSesion"] = "ok";
@@ -689,13 +694,14 @@ class ControladorUsuarios{
 				$_SESSION["email"] = $respuesta2["email"];
 				$_SESSION["password"] = $respuesta2["password"];
 				$_SESSION["modo"] = $respuesta2["modo"];
-				$_SESSION["calle"] = $respuesta["calle"];
-				$_SESSION["colonia"] = $respuesta["colonia"];
-				$_SESSION["municipio"] = $respuesta["municipio"];
-				$_SESSION["cp"] = $respuesta["cp"];
-				$_SESSION["estado"] = $respuesta["estado"];
-				$_SESSION["ciudad"] = $respuesta["ciudad"];
-				$_SESSION["pais"] = $respuesta["pais"];
+				$_SESSION["calle"] = $respuesta3["calle"];
+				$_SESSION["colonia"] = $respuesta3["colonia"];
+				$_SESSION["municipio"] = $respuesta3["municipio"];
+				$_SESSION["cp"] = $respuesta3["cp"];
+              	$_SESSION["tel"] = $respuesta3["tel"];
+				$_SESSION["estado"] = $respuesta3["estado"];
+				$_SESSION["ciudad"] = $respuesta3["ciudad"];
+				$_SESSION["pais"] = $respuesta3["pais"];
 
 
 				echo "<span style='color:white'>ok</span>";
@@ -867,12 +873,13 @@ class ControladorUsuarios{
 		if(isset($_POST["editarCalle"])){
 
 		$datos = array("calle" => $_POST["editarCalle"],
-								   "colonia" => $_POST["editarColonia"],
+								     "colonia" => $_POST["editarColonia"],
 									 "municipio" => $_POST["editarMunicipio"],
 									 "estado" => $_POST["editarEstado"],
 									 "ciudad" => $_POST["editarCiudad"],
 									 "cp" => $_POST["editarCP"],
-								   "id" => $_POST["idUsuario"]);
+                       				 "tel" => $_POST["editarTel"],
+								     "id" => $_POST["idUsuario"]);
 
 			$tabla = "usuarios";
 
@@ -888,6 +895,7 @@ class ControladorUsuarios{
 				$_SESSION["estado"] = $datos["estado"];
 				$_SESSION["ciudad"] = $datos["ciudad"];
 				$_SESSION["pais"] = $datos["pais"];
+              	$_SESSION["tel"] = $datos["tel"];
 
 				echo '<script>
 

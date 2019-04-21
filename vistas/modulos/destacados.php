@@ -28,20 +28,42 @@ if($banner != null){
 PRODUCTOS DESTACADOS
 =============================================*/
 
-$titulosModulos = array("ARTÍCULOS GRATUITOS", "LO MÁS VENDIDO", "LO MÁS VISTO");
-$rutaModulos = array("articulos-gratis","lo-mas-vendido","lo-mas-visto");
+$titulosModulos = array("LO MÁS NUEVO", "LO MÁS VENDIDO", "LO MÁS VISTO");
+$rutaModulos = array("walmart","lo-mas-vendido","lo-mas-visto");
 
 $base = 0;
 $tope = 4;
 
-if($titulosModulos[0] == "ARTÍCULOS GRATUITOS"){
+// if($titulosModulos[0] == "ARTÍCULOS GRATUITOS"){
+//
+// $ordenar = "id";
+// $item = "precio";
+// $valor = 0;
+// $modo = "DESC";
+//
+// $gratis = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
+//
+// }
+
+//if($titulosModulos[0] == "ENCUENTRALOS EN WAL-MART"){
+//
+//$ordenar = "clics";
+//$item = "estado";
+//$valor = 1;
+//$modo = "DESC";
+//
+//$walmart = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
+//
+//}
+
+if($titulosModulos[0] == "LO MÁS NUEVO"){
 
 $ordenar = "id";
-$item = "precio";
-$valor = 0;
+$item = "estado";
+$valor = 1;
 $modo = "DESC";
 
-$gratis = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
+$walmart = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
 
 }
 
@@ -67,7 +89,8 @@ $vistas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $ba
 
 }
 
-$modulos = array($gratis, $ventas, $vistas);
+
+$modulos = array($walmart, $ventas, $vistas);
 
 for($i = 0; $i < count($titulosModulos); $i ++){
 
@@ -150,9 +173,80 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 
 					if($value["estado"] != 0){
 
-					echo '<li class="col-md-3 col-sm-6 col-xs-12">
+					echo '<li class="col-md-3 col-sm-6 col-xs-12">';
 
-							<figure>
+					if ($value["tipo"] == "marketing"){
+
+						/*=============================================
+						TRAER LINKS MARKETING
+						=============================================*/
+
+						$links = json_decode($value["links"],true);
+
+					echo '<figure>
+						<a href="'.$links[0]["anchorImg"].'" class="pixelProducto">
+
+						<img src="'.$links[1]["foto"].'" class="img-responsive">
+
+						</a>
+						 <img src="'.$links[2]["foto2"].'" >
+						 </figure>
+
+					<h4>
+
+						<small>
+
+							<a href="'.$links[3]["anchorTexto"].'" class="pixelProducto">
+
+								'.$value["titulo"].'<br>
+								<img src="'.$links[4]["textoImg"].'" />
+								<span style="color:rgba(0,0,0,0)">-</span>';
+
+								echo '<span class="label label-primary fontSize">Wal-Mart</span> ';
+
+								$fecha = date('Y-m-d');
+								$fechaActual = strtotime('-30 day', strtotime($fecha));
+								$fechaNueva = date('Y-m-d', $fechaActual);
+
+								if($fechaNueva < $value["fecha"]){
+
+									echo '<span class="label label-warning fontSize">Nuevo</span> ';
+
+								}
+
+								if($value["oferta"] != 0 && $value["precio"] != 0){
+
+									echo '<span class="label label-warning fontSize">'.$value["descuentoOferta"].'% off</span>';
+
+								}
+
+							echo '</a>
+
+						</small>
+
+					</h4>
+
+							<div class="col-xs-6 precio">
+
+								<h2><small>MXN $'.$value["precio"].'</small></h2>
+
+							</div>
+
+									<div class="col-xs-6 enlaces">
+
+										<div class="btn-group pull-right">
+
+											<button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+
+												<i class="fa fa-heart" aria-hidden="true"></i>
+
+											</button>
+
+									</div>';
+
+						}else{
+
+							echo '<figure>
 
 								<a href="'.$value["ruta"].'" class="pixelProducto" >
 
@@ -275,7 +369,7 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 							</div>
 
 						</li>';
-
+					  }
 					}
 				}
 
@@ -289,9 +383,108 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 
 					echo '<li class="col-xs-12">
 
-				  		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+				  		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">';
 
-							<figure>
+							if ($value["tipo"] == "marketing"){
+
+								/*=============================================
+								TRAER LINKS MARKETING
+								=============================================*/
+
+								$links = json_decode($value["links"],true);
+
+							echo '<figure>
+								<a href="'.$links[0]["anchorImg"].'" class="pixelProducto">
+
+								<img src="'.$links[1]["foto"].'" class="img-responsive">
+
+								</a>
+								 <img src="'.$links[2]["foto2"].'" >
+								 </figure>
+
+								 </div>
+
+	 <div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
+
+		 <h1>
+
+			 <small>
+
+					<a href="'.$links[3]["anchorTexto"].'" class="pixelProducto">
+
+					 '.$value["titulo"].'<br>';
+
+					echo ' <img src="'.$links[4]["textoImg"].'" />';
+
+					echo '<span class="label label-primary">Wal-Mart</span> ';
+
+					 $fecha = date('Y-m-d');
+					 $fechaActual = strtotime('-30 day', strtotime($fecha));
+					 $fechaNueva = date('Y-m-d', $fechaActual);
+
+					 if($fechaNueva < $value["fecha"]){
+
+						 echo '<span class="label label-warning">Nuevo</span> ';
+
+					 }
+
+					 if($value["oferta"] != 0 && $value["precio"] != 0){
+
+						 echo '<span class="label label-warning">'.$value["descuentoOferta"].'% off</span>';
+
+					 }
+
+				 echo '</a>
+
+			 </small>
+
+		 </h1>
+
+		 <p class="text-muted">'.$value["titular"].'</p>';
+
+		 if($value["precio"] == 0){
+
+			 echo '<h2><small>GRATIS</small></h2>';
+
+		 }else{
+
+			 if($value["oferta"] != 0){
+
+				 echo '<h2>
+
+						 <small>
+
+							 <strong class="oferta">MXN $'.$value["precio"].'</strong>
+
+						 </small>
+
+						 <small>$'.$value["precioOferta"].'</small>
+
+					 </h2>';
+
+			 }else{
+
+				 echo '<h2><small>MXN $'.$value["precio"].'</small></h2>';
+
+			 }
+
+		 }
+
+		 echo '<div class="btn-group pull-left enlaces">
+
+				 <button type="button" class="btn btn-default btn-xs deseos"  idProducto="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+
+					 <i class="fa fa-heart" aria-hidden="true"></i>
+
+				 </button>
+
+		 </div>
+
+	 </div>';
+
+				}else{
+
+						echo '<figure>
 
 								<a href="'.$value["ruta"].'" class="pixelProducto">
 
@@ -407,11 +600,13 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 
 							</div>
 
-						</div>
+						</div>';
 
-						<div class="col-xs-12"><hr></div>
+				echo'		<div class="col-xs-12"><hr></div>
 
 					</li>';
+
+			    	}
 
 					}
 

@@ -619,7 +619,7 @@ VENTANA MODAL PARA EL INGRESO
 				</div>
 				<center>
                   
-                	<div class="g-recaptcha" data-sitekey="6LcqUWoUAAAAAItgadxEHTXMtmm4USOxoU0qyc-w"></div>
+                	<div class="g-recaptcha" data-sitekey="6LfXmHwUAAAAAFFSQvFDC7_X0bd74qdh4xAPrcXm"></div>
   
               	</center>
 

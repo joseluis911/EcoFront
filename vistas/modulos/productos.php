@@ -11,7 +11,7 @@ $ruta = $rutas[0];
 
 $banner = ControladorProductos::ctrMostrarBanner($ruta);
 
-date_default_timezone_set('America/Bogota');
+date_default_timezone_set('America/Mexico_City');
 
 $fecha = date('Y-m-d');
 $hora = date('H:i:s');
@@ -323,11 +323,11 @@ LISTAR PRODUCTOS
 			LLAMADO DE PRODUCTOS DE CATEGORÍAS, SUBCATEGORÍAS Y DESTACADOS
 			=============================================*/
 
-			if($rutas[0] == "articulos-gratis"){
+			if($rutas[0] == "walmart"){
 
-				$item2 = "precio";
-				$valor2 = 0;
-				$ordenar = "id";
+				$item2 = null;
+				$valor2 = null;
+				$ordenar = "ventas";
 
 			}else if($rutas[0] == "lo-mas-vendido"){
 
@@ -339,7 +339,7 @@ LISTAR PRODUCTOS
 
 				$item2 = null;
 				$valor2 = null;
-				$ordenar = "vistas";
+				$ordenar = "ventas";
 
 			}else{
 
@@ -382,33 +382,42 @@ LISTAR PRODUCTOS
 
 			}else{
 
-				echo '<ul class="grid0">';
+					echo '<ul class="grid0">';
 
 					foreach ($productos as $key => $value) {
 
-					if($value["estado"] != 0){
+					   if($value["estado"] != 0){
 
-						echo '<li class="col-md-3 col-sm-6 col-xs-12">
+						 echo '<li class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-12">';
 
-							<figure>
+						 	if ($value["tipo"] == "marketing"){
 
-								<a href="'.$url.$value["ruta"].'" class="pixelProducto">
+								/*=============================================
+								TRAER LINKS MARKETING
+								=============================================*/
 
-									<img src="'.$servidor.$value["portada"].'" class="img-responsive">
+								$links = json_decode($value["links"],true);
+
+							echo '<figure>
+								<a href="'.$links[0]["anchorImg"].'" class="pixelProducto">
+
+								<img src="'.$links[1]["foto"].'" class="img-responsive">
 
 								</a>
-
-							</figure>
+								 <img src="'.$links[2]["foto2"].'" >
+					       </figure>
 
 							<h4>
 
 								<small>
 
-									<a href="'.$url.$value["ruta"].'" class="pixelProducto">
+									<a href="'.$links[3]["anchorTexto"].'" class="pixelProducto">
 
 										'.$value["titulo"].'<br>
-
+										<img src="'.$links[4]["textoImg"].'" />
 										<span style="color:rgba(0,0,0,0)">-</span>';
+
+										echo '<span class="label label-primary fontSize">Wal-Mart</span> ';
 
 										$fecha = date('Y-m-d');
 										$fechaActual = strtotime('-30 day', strtotime($fecha));
@@ -432,92 +441,155 @@ LISTAR PRODUCTOS
 
 							</h4>
 
-							<div class="col-xs-6 precio">';
+									<div class="col-xs-6 precio">
 
-							if($value["precio"] == 0){
+										<h2><small>MXN $'.$value["precio"].'</small></h2>
 
-								echo '<h2><small>GRATIS</small></h2>';
+									</div>
 
-							}else{
+											<div class="col-xs-6 enlaces">
 
-								if($value["oferta"] != 0){
+												<div class="btn-group pull-right">
 
-									echo '<h2>
+													<button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
 
-											<small>
+														<i class="fa fa-heart" aria-hidden="true"></i>
 
-												<strong class="oferta">MXN $'.$value["precio"].'</strong>
+													</button>
 
-											</small>
+											</div>
+										</li>';
 
-											<small>$'.$value["precioOferta"].'</small>
-
-										</h2>';
 
 								}else{
 
-									echo '<h2><small>MXN $'.$value["precio"].'</small></h2>';
+										echo '<figure>
+
+												<a href="'.$url.$value["ruta"].'" class="pixelProducto">
+
+													<img src="'.$servidor.$value["portada"].'" class="img-responsive">
+
+												</a>
+
+											</figure>
+
+											<h4>
+
+												<small>
+
+													<a href="'.$url.$value["ruta"].'" class="pixelProducto">
+
+														'.$value["titulo"].'<br>
+
+														<span style="color:rgba(0,0,0,0)">-</span>';
+
+														$fecha = date('Y-m-d');
+														$fechaActual = strtotime('-30 day', strtotime($fecha));
+														$fechaNueva = date('Y-m-d', $fechaActual);
+
+														if($fechaNueva < $value["fecha"]){
+
+															echo '<span class="label label-warning fontSize">Nuevo</span> ';
+
+														}
+
+														if($value["oferta"] != 0 && $value["precio"] != 0){
+
+															echo '<span class="label label-warning fontSize">'.$value["descuentoOferta"].'% off</span>';
+
+														}
+
+													echo '</a>
+
+												</small>
+
+											</h4>
+
+											<div class="col-xs-6 precio">';
+
+											if($value["precio"] == 0){
+
+												echo '<h2><small>GRATIS</small></h2>';
+
+											}else{
+
+												if($value["oferta"] != 0){
+
+													echo '<h2>
+
+															<small>
+
+																<strong class="oferta">MXN $'.$value["precio"].'</strong>
+
+															</small>
+
+															<small>$'.$value["precioOferta"].'</small>
+
+														</h2>';
+
+												}else{
+
+													echo '<h2><small>MXN $'.$value["precio"].'</small></h2>';
+
+												}
+
+											}
+
+											echo '</div>
+
+											<div class="col-xs-6 enlaces">
+
+												<div class="btn-group pull-right">
+
+													<button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+
+														<i class="fa fa-heart" aria-hidden="true"></i>
+
+													</button>';
+
+													if($value["tipo"] == "virtual" && $value["precio"] != 0){
+
+														if($value["oferta"] != 0){
+
+															echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value["id"].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precioOferta"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
+
+															<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+															</button>';
+
+														}else{
+
+															echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value["id"].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precio"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
+
+															<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+															</button>';
+
+														}
+
+													}
+
+													echo '<a href="'.$url.$value["ruta"].'" class="pixelProducto">
+
+														<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
+
+															<i class="fa fa-eye" aria-hidden="true"></i>
+
+														</button>
+
+													</a>
+
+												</div>
+
+											</div>';
 
 								}
-
 							}
+						}
+					echo	'</ul>';
 
-							echo '</div>
 
-							<div class="col-xs-6 enlaces">
-
-								<div class="btn-group pull-right">
-
-									<button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-
-										<i class="fa fa-heart" aria-hidden="true"></i>
-
-									</button>';
-
-									if($value["tipo"] == "virtual" && $value["precio"] != 0){
-
-										if($value["oferta"] != 0){
-
-											echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value["id"].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precioOferta"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
-
-											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-											</button>';
-
-										}else{
-
-											echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value["id"].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precio"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
-
-											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-											</button>';
-
-										}
-
-									}
-
-									echo '<a href="'.$url.$value["ruta"].'" class="pixelProducto">
-
-										<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
-
-											<i class="fa fa-eye" aria-hidden="true"></i>
-
-										</button>
-
-									</a>
-
-								</div>
-
-							</div>
-
-						</li>';
-
-					}
-				}
-
-				echo '</ul>
-
-				<ul class="list0" style="display:none">';
+			echo '<ul class="list0" style="display:none">';
 
 				foreach ($productos as $key => $value) {
 
@@ -525,9 +597,108 @@ LISTAR PRODUCTOS
 
 						echo '<li class="col-xs-12">
 
-				  		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+				  		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">';
 
-							<figure>
+							if ($value["tipo"] == "marketing"){
+
+								/*=============================================
+								TRAER LINKS MARKETING
+								=============================================*/
+
+								$links = json_decode($value["links"],true);
+
+							echo '<figure>
+								<a href="'.$links[0]["anchorImg"].'" class="pixelProducto">
+
+								<img src="'.$links[1]["foto"].'" class="img-responsive">
+
+								</a>
+								 <img src="'.$links[2]["foto2"].'" >
+								 </figure>
+
+								 </div>
+
+				 <div class="col-lg-10 col-md-7 col-sm-8 col-xs-12">
+
+					 <h1>
+
+						 <small>
+
+								<a href="'.$links[3]["anchorTexto"].'" class="pixelProducto">
+
+								 '.$value["titulo"].'<br>';
+
+								echo ' <img src="'.$links[4]["textoImg"].'" />';
+
+								echo '<span class="label label-primary">Wal-Mart</span> ';
+
+								 $fecha = date('Y-m-d');
+								 $fechaActual = strtotime('-30 day', strtotime($fecha));
+								 $fechaNueva = date('Y-m-d', $fechaActual);
+
+								 if($fechaNueva < $value["fecha"]){
+
+									 echo '<span class="label label-warning">Nuevo</span> ';
+
+								 }
+
+								 if($value["oferta"] != 0 && $value["precio"] != 0){
+
+									 echo '<span class="label label-warning">'.$value["descuentoOferta"].'% off</span>';
+
+								 }
+
+							 echo '</a>
+
+						 </small>
+
+					 </h1>
+
+					 <p class="text-muted">'.$value["titular"].'</p>';
+
+					 if($value["precio"] == 0){
+
+						 echo '<h2><small>GRATIS</small></h2>';
+
+					 }else{
+
+						 if($value["oferta"] != 0){
+
+							 echo '<h2>
+
+									 <small>
+
+										 <strong class="oferta">MXN $'.$value["precio"].'</strong>
+
+									 </small>
+
+									 <small>$'.$value["precioOferta"].'</small>
+
+								 </h2>';
+
+						 }else{
+
+							 echo '<h2><small>MXN $'.$value["precio"].'</small></h2>';
+
+						 }
+
+					 }
+
+					 echo '<div class="btn-group pull-left enlaces">
+
+							 <button type="button" class="btn btn-default btn-xs deseos"  idProducto="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+
+								 <i class="fa fa-heart" aria-hidden="true"></i>
+
+							 </button>
+
+					 </div>
+
+				 </div>';
+
+
+			 }else{
+					echo '<figure>
 
 								<a href="'.$url.$value["ruta"].'" class="pixelProducto">
 
@@ -648,13 +819,14 @@ LISTAR PRODUCTOS
 						<div class="col-xs-12"><hr></div>
 
 					</li>';
+				     }
 
 					}
 
 				}
 
-				echo '</ul>';
-			}
+				 echo '</ul>';
+			 }
 
 			?>
 

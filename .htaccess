@@ -10,7 +10,7 @@ RewriteRule ^([-a-zA-Z0-9/]+)$ index.php?ruta=$1
 
 
 RewriteEngine On
-RewriteCond %{HTTP_HOST} ^demo.tutiendaenlinea\.online$ [OR]
-RewriteCond %{HTTP_HOST} ^www\demo.tutiendaenlinea\.online$
+RewriteCond %{HTTP_HOST} ^tutiendaenlinea\.online$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.tutiendaenlinea\.online$
 RewriteCond %{HTTPS} !on
-RewriteRule ^(.*)$ https://demo.tutiendaenlinea.online/$1 [R=301,L,NE]
+RewriteRule ^(.*)$ https://tutiendaenlinea.online/$1 [R=301,L,NE]
