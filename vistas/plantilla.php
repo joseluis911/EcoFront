@@ -257,7 +257,7 @@ if(isset($_GET["ruta"])){
 	LISTA BLANCA DE URL'S AMIGABLES
 	=============================================*/
 
-	if($ruta != null || $rutas[0] == "walmart" || $rutas[0] == "lo-mas-vendido" || $rutas[0] == "lo-mas-visto"){
+	if($ruta != null || $rutas[0] == "lo-mas-nuevo" || $rutas[0] == "lo-mas-vendido" || $rutas[0] == "lo-mas-visto"){
 
 		include "modulos/productos.php";
 

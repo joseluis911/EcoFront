@@ -323,7 +323,7 @@ LISTAR PRODUCTOS
 			LLAMADO DE PRODUCTOS DE CATEGORÍAS, SUBCATEGORÍAS Y DESTACADOS
 			=============================================*/
 
-			if($rutas[0] == "walmart"){
+			if($rutas[0] == "lo-mas-nuevo"){
 
 				$item2 = null;
 				$valor2 = null;
@@ -367,6 +367,7 @@ LISTAR PRODUCTOS
 
 
 			$productos = ControladorProductos::ctrMostrarProductos($ordenar, $item2, $valor2, $base, $tope, $modo);
+
 			$listaProductos = ControladorProductos::ctrListarProductos($ordenar, $item2, $valor2);
 
 
@@ -379,6 +380,7 @@ LISTAR PRODUCTOS
 						 <h2>Aún no hay productos en esta sección</h2>
 
 					</div>';
+
 
 			}else{
 
