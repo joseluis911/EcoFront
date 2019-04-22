@@ -29,7 +29,7 @@ PRODUCTOS DESTACADOS
 =============================================*/
 
 $titulosModulos = array("LO MÁS NUEVO", "LO MÁS VENDIDO", "LO MÁS VISTO");
-$rutaModulos = array("walmart","lo-mas-vendido","lo-mas-visto");
+$rutaModulos = array("lo-mas-nuevo","lo-mas-vendido","lo-mas-visto");
 
 $base = 0;
 $tope = 4;
@@ -63,7 +63,7 @@ $item = "estado";
 $valor = 1;
 $modo = "DESC";
 
-$walmart = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
+$nuevo = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
 
 }
 
@@ -90,7 +90,7 @@ $vistas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $ba
 }
 
 
-$modulos = array($walmart, $ventas, $vistas);
+$modulos = array($nuevo, $ventas, $vistas);
 
 for($i = 0; $i < count($titulosModulos); $i ++){
 
