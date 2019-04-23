@@ -212,7 +212,7 @@ VENTANA MODAL PARA CHECKOUT
 
 					<h4 class="text-center well text-muted text-uppercase">Elige la forma de pago</h4>
 
-					<figure class="col-xs-6">
+					<figure class="col-xs-12">
 
 						<center>
 
@@ -224,7 +224,7 @@ VENTANA MODAL PARA CHECKOUT
 
 					</figure>
 
-					<figure class="col-xs-6">
+<!-- 					<figure class="col-xs-6">
 
 						<center>
 
@@ -234,7 +234,7 @@ VENTANA MODAL PARA CHECKOUT
 
 						<img src="<?php echo $url; ?>vistas/img/plantilla/payu.jpg" class="img-thumbnail">
 
-					</figure>
+					</figure> -->
 
 				</div>
 
