@@ -295,7 +295,7 @@ VENTANA MODAL PARA CHECKOUT
 
 						</table>
 
-						 <div class="divisa">
+<!-- 						 <div class="divisa">
 
 						 	 <select class="form-control" id="cambiarDivisa" name="divisa">
 
@@ -305,7 +305,7 @@ VENTANA MODAL PARA CHECKOUT
 
 						 	<br>
 
-						 </div>
+						 </div> -->
 
 					</div>
 
