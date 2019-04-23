@@ -790,13 +790,13 @@ function divisas(metodoPago){
 
 
 
-		$("#cambiarDivisa").append('<option value="MXN">MXN</option>'+
-															'<option value="USD">USD</option>'+
-			                       '<option value="EUR">EUR</option>'+
-			                       '<option value="GBP">GBP</option>'+
-			                       '<option value="JPY">JPY</option>'+
-			                       '<option value="CAD">CAD</option>'+
-			                       '<option value="BRL">BRL</option>')
+		$("#cambiarDivisa").append('<option value="MXN">MXN</option>')
+															// '<option value="USD">USD</option>'+
+			            //            '<option value="EUR">EUR</option>'+
+			            //            '<option value="GBP">GBP</option>'+
+			            //            '<option value="JPY">JPY</option>'+
+			            //            '<option value="CAD">CAD</option>'+
+			            //            '<option value="BRL">BRL</option>')
 
 	}else{
 
