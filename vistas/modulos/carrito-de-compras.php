@@ -217,10 +217,11 @@ VENTANA MODAL PARA CHECKOUT
 						<center>
 
 							<input id="checkPaypal" type="radio" name="pago" value="paypal" checked>
+							<img src="<?php echo $url; ?>vistas/img/plantilla/paypal.jpg" class="img-thumbnail">
 
 						</center>
 
-						<img src="<?php echo $url; ?>vistas/img/plantilla/paypal.jpg" class="img-thumbnail">
+						
 
 					</figure>
 
