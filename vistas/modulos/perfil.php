@@ -161,7 +161,10 @@ SECCIÓN PERFIL
 												   	 		<h4>Recibimos tu compra!</h4>
 																 <h5>Estamos preparándonos para enviar tu producto,
 																 cualquier duda acerca de tu envio por favor
-																 comunicate con nosotros al Teléfono 5582324671.</h5>';
+
+																 comunicate con nosotros por celular o whatsapp
+																 55-82-32-46-71.</h5>';
+
 														// echo '<div class="progress">
 														//
 														// 	<div class="progress-bar progress-bar-info" role="progressbar" style="width:33.33%">
@@ -193,15 +196,9 @@ SECCIÓN PERFIL
 													   	 		<h4>Hemos enviado tu producto!</h4>
 																	<h5>cualquier duda acerca de tu envio por favor
 																	 comunicate con nosotros por celular o whatsapp
-																	 55-67-92-42-61.</h5>
-																	 <hr />
+																	 55-82-32-46-71.</h5>
+																
 
-																	<h6> Fecha de Envio: 25-09-2018
-													             <br />
-																			 Enviado por: DHL
-																			 <br/>
-																			 Guia: 100345634
-																	</h6>
 																			 ';
 
 
@@ -238,7 +235,7 @@ SECCIÓN PERFIL
 													   	 		<h4>Entregamos tu producto!</h4>
 																	 <h5> cualquier duda acerca de tu producto por favor
 																	 comunicate con nosotros por celular o whatsapp
-																	 55-67-92-42-61.</h5>';
+																	 55-82-32-46-71.</h5>';
 
 														// echo '<div class="progress">
 														//
