@@ -130,19 +130,19 @@ function movimientoSlide(item){
 
 	interrumpirCiclo = true;
 
-	$(imgProducto[item]).animate({"top":-10 +"%", "opacity": 0},100)
+	$(imgProducto[item]).animate({"top":-10 +"%", "opacity": 0},300)
 	$(imgProducto[item]).animate({"top":30 +"px", "opacity": 1},600)
 
-	$(titulos1[item]).animate({"top":-10 +"%", "opacity": 0},100)
+	$(titulos1[item]).animate({"top":-10 +"%", "opacity": 0},300)
 	$(titulos1[item]).animate({"top":30 +"px", "opacity": 1},600)
 
-	$(titulos2[item]).animate({"top":-10 +"%", "opacity": 0},100)
+	$(titulos2[item]).animate({"top":-10 +"%", "opacity": 0},300)
 	$(titulos2[item]).animate({"top":30 +"px", "opacity": 1},600)
 
-	$(titulos3[item]).animate({"top":-10 +"%", "opacity": 0},100)
+	$(titulos3[item]).animate({"top":-10 +"%", "opacity": 0},300)
 	$(titulos3[item]).animate({"top":30 +"px", "opacity": 1},600)
 
-	$(btnVerProducto[item]).animate({"top":-10 +"%", "opacity": 0},100)
+	$(btnVerProducto[item]).animate({"top":-10 +"%", "opacity": 0},300)
 	$(btnVerProducto[item]).animate({"top":30 +"px", "opacity": 1},600)
 }
 
@@ -166,7 +166,7 @@ setInterval(function(){
 
 	}
 
-},3000)
+},5000)
 
 /*=============================================
 APARECER FLECHAS
