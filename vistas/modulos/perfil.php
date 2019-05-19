@@ -161,8 +161,7 @@ SECCIÓN PERFIL
 												   	 		<h4>Recibimos tu compra!</h4>
 																 <h5>Estamos preparándonos para enviar tu producto,
 																 cualquier duda acerca de tu envio por favor
-																 comunicate con nosotros por celular o whatsapp
-																 55-67-92-42-61.</h5>';
+																 comunicate con nosotros al Teléfono 5582324671.</h5>';
 														// echo '<div class="progress">
 														//
 														// 	<div class="progress-bar progress-bar-info" role="progressbar" style="width:33.33%">
